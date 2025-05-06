@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One Health</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        max-width: 1000px;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      
+      .card {
+        width: 250px;
+      }
+
+      .card img {
+        border-radius: 10px;
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+
+      .card h2 {
+        font-size: 1.5em;
+        margin: 10px 0;
+      }
+
+      .card a {
+        display: block;
+        text-decoration: none;
+        color: white;
+        background-color: #007bff;
+        padding: 10px;
+        border-radius: 25px;
+        font-size: 1em;
+        margin-top: 10px;
+      }
+
+      .card a:hover {
+        background-color: #0056b3;
+      }
+
+      @media (max-width: 768px) {
+        .grid-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .grid-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      
+      <!-- First Item -->
+
+      <div class="card">
+        <a href="cmicroscope.html">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Dissecting%20Microscope.png?v=1745373955641" alt="Dissecting Microscope"/>
+          <h2>Compound Microscope</h2>
+        </a>
+      </div>
+      
+      <!-- Second Item -->
+
+      <div class="card">
+        <a href="supersteward.html">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/SuperSteward.png?v=1742946370680" alt="Super Steward Kit"/>
+          <h2>Super Steward Kit</h2>
+        </a>
+      </div>
+
+      <!-- Third Item -->
+
+      <div class="card">
+        <a href="weatherstation.html">
+          <img src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/WeatherStation.png?v=1742948626910" alt="Weather Station" />
+          <h2>Weather Station</h2>
+        </a>
+      </div>
+
+      <!-- Fourth Item -->
+
+      <div class="card">
+        <a href="parabolicmicrophone.html">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/ParabolicMicrophone.png?v=1742948614789"
+            alt="Parabolic Microphone"
+          />
+          <h2>Parabolic Microphone</h2>
+        </a>
+      </div>
+
+      <!-- Fifth Item -->
+
+      <div class="card">
+        <a href="phtesting.html">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/pHMeterB.png?v=1742945312853"
+            alt="pH Testing"
+          />
+          <h2>pH Testing</h2>
+        </a>
+      </div>
+
+      <!-- Sixth Item -->
+
+      <div class="card">
+        <a href="waterbugtestingkit.html">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/WaterbugTestingKit.png?v=1742948618742"
+            alt="Waterbug Testing Kit"
+          />
+          <h2>Waterbug Testing Kit</h2>
+        </a>
+      </div>
+      
+    </div>
+    
+  </body>
+</html>

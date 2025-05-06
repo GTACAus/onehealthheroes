@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Stewards Kit</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px;
+        width: 90%;
+        max-width: 600px;
+        padding: 15px;
+        text-align: center;
+        height: 800px;
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        padding-bottom: 70px;
+      }
+
+      .card.active {
+        display: flex;
+      }
+
+      .card h1 {
+        font-size: 2.5em;
+        margin-top: 15px 0px 15px 0px;
+      }
+
+      .card h2 {
+        font-size: 2em;
+        margin: 10px 0;
+      }
+
+      .card h3 {
+        font-size: 1.2em;
+        margin: 0 0 10px 0;
+      }
+
+      .card img {
+        border-radius: 0;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px auto;
+        max-height: auto;
+      }
+
+      .card p {
+        font-size: 1em;
+        margin: 0 30px;
+        line-height: 1.5em;
+        text-align: justify;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding: 0 15px;
+      }
+
+      .nav-buttons button {
+        margin: 5px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 25px;
+        background-color: #007bff;
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+      }
+
+      .nav-buttons button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Instruction text cards */
+      .card-instructions {
+        text-align: left;
+        font-size: 1.2em;
+        margin: 10px 15px 0 15px;
+      }
+
+      .card-instructions p {
+        margin: 15px 10px 15px 10px;
+        line-height: 1.1em;
+      }
+
+      .card-instructions ul {
+        padding-left: 20px;
+        margin: 20px 0 0 20px;
+        text-align: left;
+      }
+
+      /* STEM image */
+      .stem-image {
+        width: 300px !important;
+        height: auto !important;
+        margin: 25px auto !important;
+        display: block;
+      }
+
+      /* Note section */
+      .note {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        margin: 10px 0 0 50px;
+        text-align: left;
+      }
+
+      .note p {
+        font-size: 1em;
+        line-height: 1.4em;
+        margin-left: 30px;
+        max-width: 400px;
+      }
+
+      .note-icon {
+        width: 70px;
+        height: 70px;
+        background-color: #e9dfd2;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .note-icon img {
+        object-fit: contain;
+      }
+
+      /* Predict (3rd/4th card) */
+      .prediction-instructions {
+        font-size: 1.2em;
+      }
+
+      .prediction-instructions p {
+        text-align: left;
+        line-height: 1.2em;
+        margin: 10px 0px 10px 0px;
+      }
+
+      .prediction-template {
+        width: 100%;
+        text-align: center;
+        margin: 25px 0;
+      }
+
+      .prediction-template p {
+        font-size: 1.1em;
+        font-weight: 500;
+        margin: 0 auto;
+        display: inline-block;
+      }
+
+      .predict {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        margin: 20px 20px 20px 40px;
+        text-align: left;
+      }
+
+      .predict p {
+        font-size: 1em;
+        line-height: 1.4em;
+        margin-left: 20px;
+        max-width: 400px;
+      }
+
+      .predict-icon {
+        width: 230px;
+        height: 230px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .predict-icon img {
+        object-fit: contain;
+      }
+
+      /* Safety section */
+      .safety-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+
+      .safety-item {
+        flex: 1;
+        min-width: 100px;
+        max-width: 200px;
+        text-align: center;
+      }
+
+      .safety-label {
+        background-color: #2d1a4d;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 1em;
+        display: inline-block;
+        margin: 10px 0;
+      }
+
+      .safety-text {
+        margin: 30px 0;
+        text-align-last: center;
+      }
+
+      .safety-text p {
+        font-size: 1em;
+        line-height: 1.2em;
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .safety-icon {
+        width: 120px;
+        height: 120px;
+        background-color: #ff6b35;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .safety-icon img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+        background-color: #ff6b35;
+      }
+
+      /* Image + label section */
+      .image-label-pair {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0px 0px 20px;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .image-label-pair img {
+        max-width: 45%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .label-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        font-size: 1em;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .label-list li {
+        margin-bottom: 6px;
+        line-height: 1.4em;
+      }
+
+      /*Video section*/
+      .video-placeholder {
+        max-width: 100%;
+        width: 100%;
+        max-height: 350px;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+        margin: 10px auto;
+      }
+
+      /*Image popup section*/
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+
+      .popup-content {
+        position: relative;
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        max-width: 90%;
+        max-height: 90%;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 24px;
+        background: white;
+        border-radius: 50%;
+        padding: 4px 10px;
+        cursor: pointer;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- First Card -->
+    <div class="card active">
+      <h1>01/XX</h1>
+      <h2>The Super Stewards Kit</h2>
+      <img
+        style="height: 250px; width: auto; margin: 20px auto 20px auto"
+        id="The pH Meter"
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Super%20Steward%201.png?v=1745377212390"
+        alt="The pH Meter"
+      />
+      <p style="font-size: 1.1em">
+        A steward is a guardian of an environment or a community. You can learn
+        about a place, environment, or community by collecting samples and
+        recording observations you see.<br /><br />
+
+        The Super Steward Kit has different tools to help you gather lots of
+        types of evidence to look at back in the classroom. <br /><br />
+      </p>
+      <div class="nav-buttons">
+        <button onclick="location.href='index.html'">&#9664; Home</button>
+        <button
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/___Water%20pH%20Meter%20-%20One%20Health%20heroes%20info%20sheet.pdf?v=1743724741363', '_blank')"
+        >
+          Printable Instructions
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Second Card -->
+    <div class="card">
+      <h1>02/XX</h1>
+      <h2>What is in the Super Steward Kit?</h2>
+      <img
+        id="SSK-content"
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/SSK%20Content.png?v=1745378187133"
+        alt="SSK content"
+      />
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Third Card -->
+    <div class="card">
+      <h1>03/XX</h1>
+      <h2>The STEM Cycle of Inquiry: <strong>Ask</strong></h2>
+
+      <div class="card-instructions">
+        <p>Select a question to investigate from the following:</p>
+        <ul>
+          <li>
+            How many natural and unnatural things can be seen in the local
+            environment?
+          </li>
+          <li>
+            Are there any patterns where natural and unnatural things are found?
+          </li>
+          <li>
+            Is the ‘One Health’ of the area affected by the level of unnatural
+            objects in the environment?
+          </li>
+          <li>Come up with a question of your own</li>
+        </ul>
+      </div>
+
+      <img
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Ask.png?v=1743551517697"
+        style="max-height: 250px; max-width: 250px"
+        alt="Ask Hexagon Graphic"
+        class="stem-image"
+      />
+
+      <div class="note">
+        <div class="note-icon">
+          <!--Putting the ask-note-icon class within the ask-note container-->
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Write Icon"
+          />
+        </div>
+        <p>
+          Write/copy the question you are investigating on page ... of your
+          logbook
+        </p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Fourth Card -->
+    <div class="card">
+      <h1 style="margin: 10px 0px 10px 0px">04/XX</h1>
+      <h2 style="margin: 10px 0px 10px 0px">
+        The STEM Cycle of Inquiry: <strong>Predict</strong>
+      </h2>
+
+      <div class="card-instructions prediction-instructions">
+        <div style="margin: 10px 0px 10px 0px">
+          A prediction is what you think will happen in an experiment, before
+          you do it.
+        </div>
+
+        <p><strong>Use the following template to write your guess.</strong></p>
+        <div class="prediction-template">
+          <p>"If I ____, then I think ____ will happen because ____."</p>
+        </div>
+        <p>
+          <strong>If I...</strong>What will you change or test?<br />
+          <strong>Then I think...</strong>What do you think will happen?<br />
+          <strong>Because...</strong>Why do you think that? Use your own ideas
+          or what you already know.
+        </p>
+      </div>
+
+      <div class="predict">
+        <div class="predict-icon">
+          <!--Putting the predict image class within the predict container-->
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Predict.png?v=1743557433176"
+            alt="Predict Hexagon Graphic"
+            class="stem-image"
+          />
+        </div>
+        <p style="color: #2e7d32">
+          <strong> Example: </strong> <br />
+          <strong> If I </strong> investigate my local area using a super
+          stewards kit <strong> then I think </strong> I will see more unnatural
+          things then natural ones, <strong> because </strong> lots of people
+          use the area daily.
+        </p>
+      </div>
+
+      <div class="note">
+        <div class="note-icon">
+          <!--Putting the ask-note-icon class within the ask-note container-->
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Write Icon"
+          />
+        </div>
+        <p>Write your prediction on page ... of your logbook</p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Fifth Card -->
+    <div class="card">
+      <h1>05/XX</h1>
+      <h2>The STEM Cycle of Inquiry: <strong>Plan</strong></h2>
+
+      <div class="card-instructions">
+        <p>
+          Once you have asked a question and made an educated guess, you need to
+          plan your investigation. This means deciding what you are going to do
+          to test your guess.
+        </p>
+        <p>
+          <strong
+            >Consider the following questions to plan your
+            investigation:</strong
+          >
+        </p>
+        <ul>
+          <li>What will you do?</li>
+          <li>What equipment will you use?</li>
+        </ul>
+      </div>
+
+      <div class="predict">
+        <div class="predict-icon">
+          <!--Putting the predict image class within the predict container-->
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Plan.png?v=1743559806452"
+            alt="Plan Hexagon Graphic"
+            class="stem-image"
+          />
+        </div>
+        <p style="color: #2e7d32">
+          <strong> Example: </strong> <br />
+          I will use the Super Stewards kit to look at and count the number of
+          natural and unnatural things in my local environment.
+        </p>
+      </div>
+
+      <div class="note">
+        <div class="note-icon">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Write Icon"
+          />
+        </div>
+        <p>Write your plan on page ... of your logbook</p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Sixth Card -->
+    <div class="card">
+      <h1 style="font-size: 1.8em; margin: 10px 0px 10px 0px">06/XX</h1>
+      <h2 style="font-size: 1.4em; margin: 10px 0px 10px 0px">
+        Safety Considerations
+      </h2>
+      <h3 style="margin-bottom: 10px; margin-top: 10px; font-size: 1.2em">
+        When using equipment, we need to always be safe
+      </h3>
+      <p style="margin-bottom: 5px; margin-top: 5px; text-align: center">
+        Read and follow the below safety instructions when using this kit
+      </p>
+
+      <img
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_safetyinthelab_multi.svg?v=1743637745511"
+        alt="Safety Icons"
+        style="max-width: 200px; display: block; margin: 10px auto"
+      />
+
+      <div class="safety-container">
+        <div class="safety-item">
+          <div class="safety-label">Respect Wildlife</div>
+          <div class="safety-text">
+            <p>
+              Do not disturb or harm animals in their habitats, observe from a
+              safe distance. A great way to collect evidence on living things is
+              to write notes, draw pictures, or take pictures.
+            </p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <div class="safety-label">Dangerous Wildlife</div>
+          <div class="safety-text">
+            <p>
+              Sometimes snakes and small stinging insects are hard to see as you
+              explore your environment. Step carefully and remember that you are
+              a guest in their habitat and homes.
+            </p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <div class="safety-label">Personal safety</div>
+          <div class="safety-text">
+            <p>
+              Do not touch or collect anything that is alive. <br /><br />
+              Use gloves and tweezers when handling dead or unsanitary samples
+              eg. rubbish Wear safety goggles when mixing chemicals with dirt.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Seventh Card -->
+
+    <div class="card">
+      <h1>07/XX</h1>
+      <h2>How to use the Super Steward Kit</h2>
+      <h3>Type of samples you can collect</h3>
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/your-assets-folder/actual-video.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Watch this short video to learn about the type of samples you can
+        collect
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Eigth Card -->
+    <div class="card" id="SSK">
+      <h1>08/XX</h1>
+      <h2>How to use the Super Steward Kit</h2>
+      <h3>How to look at collected samples</h3>
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/your-assets-folder/actual-video.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Watch this short video to learn about how to collect different types of
+        samples
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="goToCardById('DM')" style="background-color: #4caf50">
+          Dissecting Microscope<br />
+          Quick Course
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Tenth Card -->
+    <div class="card">
+      <h1 style="margin: 10px 0px 10px 0px">10/XX</h1>
+      <h2 style="margin: 10px 0px 20px 0px; font-size: 1.3em">
+        The STEM Cycle of Inquiry: <strong>Investigate</strong>
+      </h2>
+      <h3 style="font-size: 1.2em">It’s time to do your investigation!</h3>
+
+      <div class="card-instructions">
+        <p style="margin: 10px 0px 10px 0px">
+          When conducting your investigation, you must keep track of your
+          findings/results. You can do this in a number of different ways, for
+          example:
+        </p>
+        <ul>
+          <li>Draw or describe what you see/observe</li>
+          <li>Use a table to record your results</li>
+          <li>Take photos or videos</li>
+        </ul>
+      </div>
+
+      <img
+        style="max-height: 220px; max-width: 220px"
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Investigate.png?v=1743644233972"
+        alt="Investigate Hexagon Graphic"
+        class="stem-image"
+      />
+
+      <div class="note">
+        <div class="note-icon">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Note Icon"
+          />
+        </div>
+        <p style="font-size: 0.9em">
+          Click the button below “Download Editable PDF”, to download a table
+          that will help you collect your results. Click the ‘Example’ button to
+          see a worked example for how to fill in your data.<br /><br />
+          When you have filled the table in, copy (or insert a picture) your
+          results on page ... of your logbook
+        </p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+
+        <!-- Grouping the PDF and Example buttons -->
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <button
+            style="
+              background-color: #ccc;
+              color: black;
+              padding: 10px 20px;
+              font-size: 1em;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              margin-bottom: 10px;
+            "
+            onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/SSK-example-Investigate.png?v=1745387813614', '_blank')"
+          >
+            Download Editable PDF
+          </button>
+
+          <button
+            style="
+              background-color: #ccc;
+              color: black;
+              padding: 10px 20px;
+              font-size: 1em;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+            onclick="openPopup('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/SSK-example.png?v=1745387551206')"
+          >
+            Example
+          </button>
+        </div>
+
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- 11th Card -->
+    <div class="card">
+      <h1 style="margin: 10px 0px 10px 0px">11/XX</h1>
+      <h2 style="margin: 20px 0px 20px 0px; font-size: 1.3em">
+        The STEM Cycle of Inquiry: <strong>Analyse and Reflect</strong>
+      </h2>
+
+      <div class="card-instructions">
+        <p>
+          After your investigation, it is important to make sense of your
+          results and find out what they mean. This stage will help you answer
+          your original investigation question and see if your prediction was
+          correct or not.
+        </p>
+      </div>
+
+      <img
+        style="max-height: 250px; max-width: 250px"
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Analyse.png?v=1743644237493"
+        alt="Analyse and Reflect Hexagon Graphic"
+        class="stem-image"
+      />
+
+      <div class="note">
+        <div class="note-icon">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Note Icon"
+          />
+        </div>
+        <p style="font-size: 0.9em">
+          click the button below “Download Editable PDF”, to download questions
+          that will help you analyse and reflect. Click the ‘Example’ button to
+          see a worked example for how to analyse your data. <br /><br />
+
+          Copy your answers on page ... of your logbook
+        </p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+
+        <!-- Grouping the PDF and Example buttons -->
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <button
+            style="
+              background-color: #ccc;
+              color: black;
+              padding: 10px 20px;
+              font-size: 1em;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              margin-bottom: 10px;
+            "
+            onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+          >
+            Download Editable PDF
+          </button>
+
+          <button
+            style="
+              background-color: #ccc;
+              color: black;
+              padding: 10px 20px;
+              font-size: 1em;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+            onclick="openPopup('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/PM-example-Investigate.png?v=1745389184243')"
+          >
+            Example
+          </button>
+        </div>
+
+        <button onclick="location.href='index.html'">Home &#9654;</button>
+      </div>
+    </div>
+    <!-- Cards for  Dissecting Microscope Quick Course -->
+    <!-- DM-1 -->
+
+    <div class="card" id="DM">
+      <h1>01/10</h1>
+      <h2>Parts of the Dissecting Microscope</h2>
+      <img
+        id="DM-content"
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Dissecting%20Microscope%20parts.png?v=1745385080048"
+        style="max-width: 500px; max-height: 500px"
+        alt="CM-content"
+      />
+
+      <p style="text-align: left">
+        <strong>Key Features:</strong>
+      </p>
+      <ul style="text-align: left">
+        <li>Maximum magnification: 40X</li>
+        <li>Able to see samples in 3D</li>
+        <li>Allows you to see the surface of a sample</li>
+      </ul>
+
+      <div class="nav-buttons">
+        <button onclick="goToCardById('SSK')">&#9664; Back</button>
+
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- DM-2 card -->
+    <div class="card">
+      <h1 style="font-size: 1.8em; margin: 10px 0px 10px 0px">02/10</h1>
+      <h2 style="font-size: 1.4em; margin: 10px 0px 10px 0px">
+        Safety Considerations
+      </h2>
+      <h3 style="margin-bottom: 10px; margin-top: 10px; font-size: 1.2em">
+        When using equipment, we need to aways be safe. <br />
+        Read and follow the below safety instructions when using a microscope.
+      </h3>
+
+      <img
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_safetyinthelab_multi.svg?v=1743637745511"
+        alt="Safety Icons"
+        style="max-width: 200px; display: block; margin: 10px auto"
+      />
+
+      <div class="safety-container">
+        <div class="safety-item">
+          <div class="safety-label">Electrical Components</div>
+          <div class="safety-text">
+            <p>
+              Avoid getting water/liquid on the microscope. <br />
+              Notify an adult of any spills.
+            </p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <div class="safety-label">Handling Glass</div>
+          <div class="safety-text">
+            <p>
+              You will be preparing and using glass slides. Ensure careful
+              handling of glass. <br />
+              <br />
+              Notify an adult if you drop and/or break any glass.
+            </p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <div class="safety-label">Health and Safety</div>
+          <div class="safety-text">
+            <p>
+              Do not eat or drink while working with the samples. <br /><br />
+              Wash your hands after handling samples.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+    <!-- DM-2 Card -->
+    <div class="card">
+      <h1>03/10</h1>
+      <h2>Using a Dissecting microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/DM1-Turning%20On%20Light.mp4?v=1745821091248"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 1: Use the On/Off switch to turn the light source on.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- DM-3 Card -->
+    <div class="card">
+      <h1>04/10</h1>
+      <h2>Using a Dissecting microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/DM2-Adjust%20the%20base.mp4?v=1745881038460"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 2: Adjust the base. Depending on the sample, it may be best to use
+        a black background or a white background. Try both and see which shows
+        the sample best.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- DM-5 Card -->
+    <div class="card">
+      <h1>05/10</h1>
+      <h2>Using a Dissecting microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/DM3-Place%20sample.mp4?v=1745881040666"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 3: Place the sample directly under the microscope lens.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- DM-6 Card -->
+    <div class="card">
+      <h1>06/10</h1>
+      <h2>Using a Dissecting microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/DM4-Adjust%20eyepieces.mp4?v=1745881043799"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 4: Adjust eyepieces. Move the eyepieces until they are a
+        comfortable distance apart for you to look down. <br /><br />
+
+        Note: If you see two separate circles/focal points then you will need to
+        keep adjusting until you see only one.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- DM-7 Card -->
+    <div class="card">
+      <h1>07/10</h1>
+      <h2>Using a Dissecting microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/DM5-Focus.mp4?v=1745881046637"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 5: Turn the focus knob until the sample looks clear.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+    <!-- DM-8 Card -->
+    <div class="card">
+      <h1>08/10</h1>
+      <h2>Using a Dissecting microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/DM6-Investigate%20sample.mp4?v=1745881050218"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 6: Investigate your sample. Use your hands to manually move the
+        sample until you see something of interest.<br /><br />
+
+        Note: You may need to adjust the focus knob when looking at different
+        points of interest.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- DM-9 Card -->
+    <div class="card">
+      <h1>09/10</h1>
+      <h2>Using a Dissecting microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/DM7-Increase%20mgnification.mp4?v=1745881051779"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 7: Increase magnification. You have two magnification settings, 2X
+        and 4X. Turn the objective lens to increase or decrease magnification.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+    <!-- DM-10 Card -->
+    <div class="card">
+      <h1>10/10</h1>
+      <h2>Using a Dissecting microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/DM8-Turn%20off%20light.mp4?v=1745881054210"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 8: When you have finished using the microscope, turn off the light
+        to prevent it from overheating.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button
+          style="
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          "
+          onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/STEM_Cycle_Investigation_Table.pdf?v=1743720380952', '_blank')"
+        >
+          Printable Microscope <br />
+          Instructions
+        </button>
+        <button onclick="goToCardById('SSK')">
+          Back to the <br />
+          Waterbugs Testing Kit
+        </button>
+      </div>
+    </div>
+
+    <!-- Universal Popup -->
+    <div id="imagePopup" class="popup-overlay" onclick="closePopup()">
+      <div class="popup-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closePopup()">×</span>
+        <img
+          id="popupImage"
+          alt="Example Popup"
+          style="
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+          "
+        />
+      </div>
+    </div>
+
+    <!-- Scripts -->
+
+    <script>
+      let currentCard = 0;
+      let cards; // Declare cards globally
+
+      window.onload = function () {
+        cards = document.querySelectorAll(".card");
+        showCard(currentCard);
+      };
+
+      function showCard(index) {
+        cards.forEach((card, i) => {
+          card.classList.toggle("active", i === index);
+        });
+      }
+
+      function nextPage() {
+        if (currentCard < cards.length - 1) {
+          currentCard++;
+          showCard(currentCard);
+        }
+      }
+
+      function prevPage() {
+        if (currentCard > 0) {
+          currentCard--;
+          showCard(currentCard);
+        }
+      }
+
+      function goToCardById(cardId) {
+        const index = Array.from(cards).findIndex((card) => card.id === cardId);
+        if (index !== -1) {
+          currentCard = index;
+          showCard(currentCard);
+        } else {
+          console.warn("Card with ID '" + cardId + "' not found.");
+        }
+      }
+
+      function openPopup(imageUrl) {
+        const popup = document.getElementById("imagePopup");
+        const popupImage = document.getElementById("popupImage");
+        popupImage.src = imageUrl;
+        popup.style.display = "flex";
+      }
+
+      function closePopup() {
+        document.getElementById("imagePopup").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

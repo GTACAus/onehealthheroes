@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Health</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .grid-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .card {
+      background-color: #007bff;
+      border-radius: 15px;
+      overflow: hidden;
+      text-align: center;
+      color: white;
+      padding: 15px 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 220px; /* Set width based on white box + text */
+    }
+
+    .image-box {
+      background: white;
+      border-radius: 10px;
+      width: 200px;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .card h2 {
+      font-size: 1.1em;
+      margin: 0;
+      line-height: 1.3em;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+ <div class="grid-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; width: 100%; padding: 20px; box-sizing: border-box; justify-items: center;">
+
+
+    <div class="card">
+      <a href="cmicroscope.html">
+        <div class="image-box">
+          <img src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Dissecting%20Microscope.png?v=1745373955641" alt="Dissecting Microscope" />
+        </div>
+        <h2>Biodiversity Test</h2>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="supersteward.html">
+        <div class="image-box">
+          <img src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Super%20Steward%201.png?v=1745378176909" alt="Super Steward Kit" />
+        </div>
+        <h2>Super Steward Kit</h2>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="weatherstation.html">
+        <div class="image-box">
+          <img src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/WeatherStation.png?v=1745819472628" alt="Weather Station" />
+        </div>
+        <h2>Weather Station</h2>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="parabolicmicrophone.html">
+        <div class="image-box">
+          <img src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/ParabolicMicrophone.png?v=1742948614789" alt="Parabolic Microphone" />
+        </div>
+        <h2>Parabolic Microphone</h2>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="phtesting.html">
+        <div class="image-box">
+          <img src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/pHMeterB.png?v=1742945312853" alt="pH Testing" />
+        </div>
+        <h2>pH Testing</h2>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="waterbugtestingkit.html">
+        <div class="image-box">
+          <img src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/WBTK1.png?v=1745819276653" alt="Waterbug Testing Kit" />
+        </div>
+        <h2>Waterbug Testing Kit</h2>
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>

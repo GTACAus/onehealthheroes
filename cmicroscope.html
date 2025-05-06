@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biodiversity Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px;
+        width: 90%;
+        max-width: 600px;
+        padding: 15px;
+        text-align: center;
+        height: 800px;
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        padding-bottom: 70px;
+      }
+
+      .card.active {
+        display: flex;
+      }
+
+      .card h1 {
+        font-size: 2.3em;
+        margin-top: 15px 0px 15px 0px;
+      }
+
+      .card h2 {
+        font-size: 1.8em;
+        margin: 10px 0;
+      }
+
+      .card h3 {
+        font-size: 1.2em;
+        margin: 0 0 10px 0;
+      }
+
+      .card img {
+        border-radius: 0;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px auto;
+        max-height: 350px;
+      }
+
+      .card p {
+        font-size: 1em;
+        margin: 0 30px;
+        line-height: 1.5em;
+        text-align: justify;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding: 0 15px;
+      }
+
+      .nav-buttons button {
+        margin: 5px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 25px;
+        background-color: #007bff;
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+      }
+
+      .nav-buttons button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Instruction text cards */
+      .card-instructions {
+        text-align: left;
+        font-size: 1.2em;
+        margin: 10px 15px 0 15px;
+      }
+
+      .card-instructions p {
+        margin: 15px 10px 15px 10px;
+        line-height: 1.1em;
+      }
+
+      .card-instructions ul {
+        padding-left: 20px;
+        margin: 20px 0 0 20px;
+        text-align: left;
+      }
+
+      /* STEM image */
+      .stem-image {
+        width: 300px !important;
+        height: auto !important;
+        margin: 25px auto !important;
+        display: block;
+      }
+
+      /* Note section */
+      .note {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        margin: 10px 0 0 50px;
+        text-align: left;
+      }
+
+      .note p {
+        font-size: 1em;
+        line-height: 1.4em;
+        margin-left: 30px;
+        max-width: 400px;
+      }
+
+      .note-icon {
+        width: 70px;
+        height: 70px;
+        background-color: #e9dfd2;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .note-icon img {
+        object-fit: contain;
+      }
+
+      /* Predict (3rd/4th card) */
+      .prediction-instructions {
+        font-size: 1.2em;
+      }
+
+      .prediction-instructions p {
+        text-align: left;
+        line-height: 1.2em;
+        margin: 10px 0px 10px 0px;
+      }
+
+      .prediction-template {
+        width: 100%;
+        text-align: center;
+        margin: 25px 0;
+      }
+
+      .prediction-template p {
+        font-size: 1.1em;
+        font-weight: 500;
+        margin: 0 auto;
+        display: inline-block;
+      }
+
+      .predict {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        margin: 20px 20px 20px 40px;
+        text-align: left;
+      }
+
+      .predict p {
+        font-size: 1em;
+        line-height: 1.4em;
+        margin-left: 20px;
+        max-width: 400px;
+      }
+
+      .predict-icon {
+        width: 230px;
+        height: 230px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .predict-icon img {
+        object-fit: contain;
+      }
+
+      /* Safety section */
+      .safety-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+
+      .safety-item {
+        flex: 1;
+        min-width: 100px;
+        max-width: 200px;
+        text-align: center;
+      }
+
+      .safety-label {
+        background-color: #2d1a4d;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 1em;
+        display: inline-block;
+        margin: 10px 0;
+      }
+
+      .safety-text {
+        margin: 30px 0;
+        text-align-last: center;
+      }
+
+      .safety-text p {
+        font-size: 1em;
+        line-height: 1.2em;
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .safety-icon {
+        width: 120px;
+        height: 120px;
+        background-color: #ff6b35;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .safety-icon img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+        background-color: #ff6b35;
+      }
+
+      /* Image + label section */
+      .image-label-pair {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0px 0px 20px;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .image-label-pair img {
+        max-width: 45%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .label-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        font-size: 1em;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .label-list li {
+        margin-bottom: 6px;
+        line-height: 1.4em;
+      }
+
+      /*Video section*/
+      .video-placeholder {
+        max-width: 100%;
+        width: 100%;
+        max-height: 350px;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+        margin: 10px auto;
+      }
+
+      /*Image popup section*/
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+
+      .popup-content {
+        position: relative;
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        max-width: 90%;
+        max-height: 90%;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 24px;
+        background: white;
+        border-radius: 50%;
+        padding: 4px 10px;
+        cursor: pointer;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- First Card -->
+    <div class="card active">
+      <h1>01/06</h1>
+      <h2>The STEM Cycle of Inquiry: <strong>Ask Stage</strong></h2>
+
+      <div class="card-instructions">
+        <p>
+          For this investigation, you will be exploring the following question:
+        </p>
+        <p
+          style="
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+          "
+        >
+          How <b><u>biodiverse</u></b> is my local waterway?
+        </p>
+      </div>
+
+      <img
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Ask.png?v=1743551517697"
+        alt="Ask Hexagon Graphic"
+        class="stem-image"
+      />
+
+      <div class="note">
+        <div class="note-icon">
+          <!--Putting the ask-note-icon class within the ask-note container-->
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Write Icon"
+          />
+        </div>
+        <p>Copy the question you are investigating on page 3 of your logbook</p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="location.href='index.html'">&#9664; Home</button>
+
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Second Card -->
+    <div class="card">
+      <h1 style="margin: 10px 0px 10px 0px">02/06</h1>
+      <h2 style="margin: 10px 0px 10px 0px">
+        The STEM Cycle of Inquiry: <strong>Predict Stage</strong>
+      </h2>
+
+      <div class="card-instructions prediction-instructions">
+        <div style="margin: 10px 0px 10px 0px">
+          A prediction is what you think will happen in an experiment, before
+          you do it.
+        </div>
+
+        <p><strong>Use the following template to write your guess.</strong></p>
+        <div class="prediction-template">
+          <p style="text-align: center">
+            "If I look at microorganisms under a microscope, then I think I will
+            see ____ because ____ "
+          </p>
+        </div>
+        <p>
+          <strong>If I...</strong>What will you change or test?<br />
+          <strong>Then I think...</strong>What do you think will happen?<br />
+          <strong>Because...</strong>Why do you think that? Use your own ideas
+          or what you already know.
+        </p>
+      </div>
+
+      <div class="predict">
+        <div class="predict-icon">
+          <!--Putting the predict image class within the predict container-->
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Predict.png?v=1743557433176"
+            alt="Predict Hexagon Graphic"
+            class="stem-image"
+          />
+        </div>
+        <p style="color: #2e7d32; text-align: center">
+          <strong>Example:</strong> If I look at microorganisms under a microscope, then I think
+          I will see lots of different organisms because I think the waterway
+          will have lots of biodiversity.
+        </p>
+      </div>
+
+      <div class="note">
+        <div class="note-icon">
+          <!--Putting the ask-note-icon class within the ask-note container-->
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Write Icon"
+          />
+        </div>
+        <p>Write your prediction on page 2 of your logbook</p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Third Card -->
+    <div class="card">
+      <h1>03/06</h1>
+      <h2>The STEM Cycle of Inquiry: <strong>Plan Stage</strong></h2>
+
+      <div class="card-instructions">
+        <p>
+          Once you have asked a question and made an educated guess, you need to
+          plan your investigation. This means deciding what you are going to do
+          to test your guess.
+        </p>
+        <p>
+          <strong>For this investigation:</strong>
+        </p>
+        <ul>
+          <li>
+            You will use microscopes to observe and record what microorganisms
+            live in the water
+          </li>
+        </ul>
+      </div>
+
+      <img
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Plan.png?v=1743559806452"
+        alt="Plan Hexagon Graphic"
+        class="stem-image"
+      />
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Fourth Card -->
+    <div class="card" id="SAFE">
+      <h1>04/06</h1>
+      <h2>Safety Considerations</h2>
+      <h3 style="margin-bottom: 10px; margin-top: 10px">
+        When using equipment, we need to always be safe
+      </h3>
+      <p style="margin-bottom: 10px; margin-top: 10px; text-align: center">
+        Read and follow the below safety instructions when using this kit
+      </p>
+
+      <img
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_safetyinthelab_multi.svg?v=1743637745511"
+        alt="Safety Icons"
+        style="max-width: 200px; display: block; margin: 10px auto"
+      />
+
+      <div class="safety-container">
+        <div class="safety-item">
+          <div class="safety-label">Electrical Components</div>
+          <div class="safety-text">
+            <p>Avoid getting water/liquid on the microscope.</p>
+            <p>Notify an adult of any spills.</p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <div class="safety-label">Handling Glass</div>
+          <div class="safety-text">
+            <p>
+              You will be preparing and using glass slides. Ensure careful
+              handling of glass.
+            </p>
+            <p>Notify an adult if you drop and/or break any glass.</p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <div class="safety-label">Health and Safety</div>
+          <div class="safety-text">
+            <p>Do not eat or drink while working with the samples.</p>
+            <p>Wash your hands after handling samples.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="goToCardById('CM')" style="background-color: #4caf50">
+          Compound Microscope<br />
+          Quick Course
+        </button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Fifth Card -->
+    <div class="card" id="INVESTIGATE">
+      <h1 style="margin: 10px 0px 10px 0px">05/06</h1>
+      <h2 style="margin: 10px 0px 20px 0px; font-size: 1.3em">
+        The STEM Cycle of Inquiry: <strong>Investigate Stage</strong>
+      </h2>
+      <h3 style="font-size: 1.2em">It’s time to do your investigation!</h3>
+
+      <div class="card-instructions">
+        <p>
+          When conducting your investigation, you must keep track of your
+          findings/results.
+        </p>
+      </div>
+
+      <div class="note" style="margin: 10px auto 10px auto">
+        <div class="note-icon">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Note Icon"
+          />
+        </div>
+        <p style="font-size: 1em">
+          Draw and label each organism you see in the spaces provided in your
+          logbook (page 4). Be sure to keep track of how many times you see the
+          same organism.
+        </p>
+      </div>
+
+      <img
+        style="max-height: 220px; max-width: 220px"
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Investigate.png?v=1743644233972"
+        alt="Investigate Hexagon Graphic"
+        class="stem-image"
+      />
+
+      <div class="card-instructions">
+        <p style="text-align: center">
+          Click the ‘Example’ button to
+          see a worked example for how to fill in your data.
+        </p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+
+        <!-- Grouping the PDF and Example buttons -->
+        <div style="display: flex; flex-direction: column; align-items: center">
+
+          <button
+            style="
+              background-color: #ccc;
+              color: black;
+              padding: 10px 20px;
+              font-size: 1em;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+            onclick="openPopup('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Compount%20Microscope%20Investigate%20Example.png?v=1746406349471')"
+          >
+            Example
+          </button>
+        </div>
+
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Sixth Card -->
+    <div class="card">
+      <h1 style="margin: 10px 0px 10px 0px">06/06</h1>
+      <h2 style="margin: 20px 0px 20px 0px; font-size: 1.3em">
+        The STEM Cycle of Inquiry: <strong>Analyse and Reflect</strong>
+      </h2>
+
+      <div class="card-instructions">
+        <p>
+          After your investigation, it is important to make sense of your
+          results and find out what they mean. This stage will help you answer
+          your original investigation question and see if your prediction was
+          correct or not.
+        </p>
+      </div>
+
+      <img
+        style="max-height: 250px; max-width: 250px"
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Analyse.png?v=1743644237493"
+        alt="Analyse and Reflect Hexagon Graphic"
+        class="stem-image"
+      />
+
+      <div class="note">
+        <div class="note-icon">
+          <img
+            src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/gtac_record_blue.png?v=1743551520764"
+            alt="Note Icon"
+          />
+        </div>
+        <p style="font-size: 0.9em">
+          Answer question 5 and 6 on page 5 of your logbook.
+          <br /><br />
+
+          Click the ‘Example’ button to see a worked example for how to analyse
+          your data.
+        </p>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+
+        <!-- Grouping the PDF and Example buttons -->
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <button
+            style="
+              background-color: #ccc;
+              color: black;
+              padding: 10px 20px;
+              font-size: 1em;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+            onclick="openPopup('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Compound%20Microscope%20Analyse%20Example.png?v=1746408647561')"
+          >
+            Example
+          </button>
+        </div>
+
+        <button onclick="location.href='index.html'">Home &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM Quick Course Cards -->
+    <!-- CM-1 Card -->
+    <div class="card" id="CM">
+      <h1>01/10</h1>
+      <h2>Parts of the Compound Microscope</h2>
+      <img
+        id="CM-content"
+        src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM.png?v=1745475909023"
+        alt="CM-content"
+      />
+
+      <p style="text-align: left">
+        <strong>Key Features:</strong>
+      </p>
+      <ul style="text-align: left">
+        <li>Maximum magnification: 1000X</li>
+        <li>Uses 2 sets of lenses to see samples in 2D</li>
+        <li>Allows you to see through/inside thin samples</li>
+      </ul>
+
+      <div class="nav-buttons">
+        <button onclick="goToCardById('SAFE')">&#9664; Previous</button>
+
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <button
+            style="
+              background-color: #ccc;
+              color: black;
+              padding: 10px 20px;
+              font-size: 1em;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              margin-bottom: 10px;
+            "
+            onclick="window.open('https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/Compound%20Mic%20Instructions.pdf?v=1746408852172', '_blank')"
+          >
+            Printable <br />
+            Instructions
+          </button>
+        </div>
+
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-2 Card -->
+    <div class="card">
+      <h1>02/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM1-Go%20to%20lowest%20magnification.mp4?v=1745907161954"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 1: Adjust your objective lens to the lowest magnification (4X). Be sure to do this using the black dial only
+        <br />
+        <br />
+
+        Note: Touching the lenses can damage them.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-3 Card -->
+    <div class="card">
+      <h1>03/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM2-Insert%20slide.mp4?v=1745907169848"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 2: Insert your slide using the stage clip to hold it in place.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-4 Card -->
+    <div class="card">
+      <h1>04/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM4-Turn%20on%20light.mp4?v=1745907176278"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 3: Turn on the light at the base and use the <br />illumination
+        dial to adjust the lighting (if needed).
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-5 Card -->
+    <div class="card">
+      <h1>05/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM3-Place%20sample%20over%20light.mp4?v=1745907172511"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 4: Use your X and Y stage controls<br />
+        to place your sample over the light source.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-6 Card -->
+    <div class="card">
+      <h1>06/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM5-Bring%20stage%20up.mp4?v=1745907179493"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 5: Bring the stage up to the maximum height <br />
+        using the course focus knob. <br /><br />
+        Note: Ensure you are at the lowest magnification (4x) <br />
+        before you do this to avoid hitting the slide into the lens.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-7 Card -->
+    <div class="card">
+      <h1>07/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM6-Bring%20stage%20down%20slightly.mp4?v=1745907183688"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 6: Looking at the screen or down the eye pieces, <strong>use the course focus knob</strong> to bring the stage down slightly until you see a clear image.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-8 Card -->
+    <div class="card">
+      <h1>08/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM7-Increase%20magnification.mp4?v=1745907186971"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 7: Increase the magnification by switching to the next highest
+        objective lens (yellow 10X). Be sure to do this using the black dial
+        only. <br /><br />
+
+        Note: If you get lost at any point after this step, go back to the
+        lowest magnification (4X) and start again.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-9 Card -->
+    <div class="card">
+      <h1>09/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM8-Fine%20focus.mp4?v=1745907190900"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 8: Adjust the fine focus knob to make your image clearer.
+        <br /><br />
+
+        Note: You will only need to adjust the fine focus knob from here on, do
+        not adjust the course focus knob or you will bring the sample out of
+        focus.
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="nextPage()">Next &#9654;</button>
+      </div>
+    </div>
+
+    <!-- CM-10 Card -->
+    <div class="card">
+      <h1>10/10</h1>
+      <h2>Using a Compound Microscope</h2>
+
+      <!-- Placeholder video image -->
+      <video class="video-placeholder" controls>
+        <source
+          src="https://cdn.glitch.global/2ff587d9-8bfc-4b66-8724-2986e005104a/CM9-Investigate%20sample.mp4?v=1745907195362"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <p style="margin-top: 20px; font-weight: bold; text-align: center">
+        Step 9: Use the X and Y stage controls to investigate your sample
+        further
+      </p>
+
+      <div class="nav-buttons">
+        <button onclick="prevPage()">&#9664; Previous</button>
+        <button onclick="goToCardById('INVESTIGATE')">Exit Course &#9654;</button>
+      </div>
+    </div>
+
+    <!-- Universal Popup -->
+    <div id="imagePopup" class="popup-overlay" onclick="closePopup()">
+      <div class="popup-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closePopup()">×</span>
+        <img
+          id="popupImage"
+          alt="Example Popup"
+          style="
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+          "
+        />
+      </div>
+    </div>
+
+    <!-- Scripts -->
+
+    <script>
+      let currentCard = 0;
+      const cards = document.querySelectorAll(".card");
+
+      function showCard(index) {
+        cards.forEach((card, i) => {
+          card.classList.toggle("active", i === index);
+        });
+      }
+
+      function nextPage() {
+        if (currentCard < cards.length - 1) {
+          currentCard++;
+          showCard(currentCard);
+        }
+      }
+
+      function prevPage() {
+        if (currentCard > 0) {
+          currentCard--;
+          showCard(currentCard);
+        }
+      }
+
+      function goToCardById(cardId) {
+        const index = Array.from(cards).findIndex((card) => card.id === cardId);
+        if (index !== -1) {
+          currentCard = index;
+          showCard(currentCard);
+        } else {
+          console.warn("Card with ID '" + cardId + "' not found.");
+        }
+      }
+
+      function openPopup(imageUrl) {
+        const popup = document.getElementById("imagePopup");
+        const popupImage = document.getElementById("popupImage");
+        popupImage.src = imageUrl;
+        popup.style.display = "flex";
+      }
+
+      function closePopup() {
+        document.getElementById("imagePopup").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
