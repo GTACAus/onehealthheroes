@@ -615,7 +615,7 @@
     <div class="card">
       <h1 style="margin: 10px 0px 10px 0px">06/06</h1>
       <h2 style="margin: 20px 0px 20px 0px; font-size: 1.3em">
-        The STEM Cycle of Inquiry: <strong>Analyse and Reflect</strong>
+        The STEM Cycle of Inquiry: <strong>Analyse and Reflect Stage</strong>
       </h2>
 
       <div class="card-instructions">
@@ -953,7 +953,7 @@
 
       <div class="nav-buttons">
         <button onclick="prevPage()">&#9664; Previous</button>
-        <button onclick="goToCardById('INVESTIGATE')">Exit Course &#9654;</button>
+        <button onclick="goToCardById('SAFE')">Exit Course &#9654;</button>
       </div>
     </div>
 
@@ -981,6 +981,13 @@
       const cards = document.querySelectorAll(".card");
 
       function showCard(index) {
+        // Pause and reset all videos
+        document.querySelectorAll("video").forEach((video) => {
+          video.pause();
+          video.currentTime = 0;
+        });
+
+        // Show only the selected card
         cards.forEach((card, i) => {
           card.classList.toggle("active", i === index);
         });
