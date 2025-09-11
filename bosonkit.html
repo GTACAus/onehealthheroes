@@ -284,7 +284,8 @@
         height: auto;
         border-radius: 10px;
       }
-
+      
+      
       .image-preview-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -329,38 +330,41 @@
 
       /*Image popup section*/
       .popup-overlay {
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        display: none;
-        align-items: center;
+        background: rgba(0, 0, 0, 0.5); /* green overlay */
         justify-content: center;
-        z-index: 9999;
+        align-items: center;
+        z-index: 1000;
       }
 
       .popup-content {
-        position: relative;
         background: white;
-        padding: 15px;
+        padding: 20px;
         border-radius: 12px;
+        position: relative;
         max-width: 90%;
         max-height: 90%;
       }
 
+      .popup-content img {
+        max-width: 100%;
+        max-height: 80vh;
+      }
+
       .close-btn {
         position: absolute;
-        top: -10px;
-        right: -10px;
-        font-size: 24px;
-        background: white;
-        border-radius: 50%;
-        padding: 4px 10px;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
         cursor: pointer;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
       }
+
+
     </style>
   </head>
 
@@ -382,12 +386,12 @@ When you connect the sensors to the micro:bit, you can design and run your own i
       <div class="nav-buttons">
         <button onclick="location.href='index.html'">&#9664; Home</button>
 
-        </button>
         <button onclick="nextPage()">Next &#9654;</button>
       </div>
     </div>
 
     <!-- Second Card -->
+
     <div class="card">
       <h1>02/11</h1>
       <h2>Select the sensor you are going to work with!</h2>
@@ -396,13 +400,16 @@ When you connect the sensors to the micro:bit, you can design and run your own i
       <h3>Click on one of the sensors to preview your task:</h3>
       
       <div class="image-preview-grid">
-  <button
+
+        
+ <button
     style="background: #ff6d3a; border-radius: 12px; padding: 10px; margin: 10px; border: none; cursor: pointer;"
     onclick="openPopup('Howto_SoilTemp.png')"
   >
     <img src="SoilTempSensor.png" alt="Soil Temp Example" style="width:100px; height:100px; border-radius:50%;" />
     <div><strong>Soil Temperature Sensor (i19)</strong></div>
   </button>
+
   <button
     style="background: #ff6d3a; border-radius: 12px; padding: 10px; margin: 10px; border: none; cursor: pointer;"
     onclick="openPopup('Howto_SoilMoisture.png')"
@@ -410,13 +417,15 @@ When you connect the sensors to the micro:bit, you can design and run your own i
     <img src="SoilMoistureSensor.png" alt="Plant Example" style="width:100px; height:100px; border-radius:50%;" />
     <div><strong>Soil Moisture Sensor (i16)</strong></div>
   </button>
+
   <button
     style="background: #ff6d3a; border-radius: 12px; padding: 10px; margin: 10px; border: none; cursor: pointer;"
     onclick="openPopup('Howto_AirHumidity.png')"
   >
     <img src="HumiditySensor.png" alt="Water Example" style="width:100px; height:100px; border-radius:50%;" />
-    <div> <strong>Humidity Sensor (i18 or i27)</strong></div>
+    <div><strong>Humidity Sensor (i18 or i27)</strong></div>
   </button>
+
   <button
     style="background: #ff6d3a; border-radius: 12px; padding: 10px; margin: 10px; border: none; cursor: pointer;"
     onclick="openPopup('Howto_LightIntensity.png')"
@@ -433,6 +442,14 @@ When you connect the sensors to the micro:bit, you can design and run your own i
         <button onclick="nextPage()">Next &#9654;</button>
       </div>
     </div>
+        <!-- Universal Popup -->
+<div id="popup" class="popup-overlay" onclick="closePopup()">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <img id="popup-img" src="" alt="Popup Image" />
+  </div>
+</div>
+
 
     <!-- Third Card -->
     <div class="card">
@@ -779,32 +796,7 @@ What soil temperature does your plant need? </h3>
             "
             onclick="openPopup('Example_Soil.png', '_blank')"
           >
-          <div class="image-toggle-group" style="margin: 30px 0; display: flex; gap: 16px; justify-content: center;">
-  <button
-    style="background-color: #ff6d3a; color: white; padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-family: 'Figtree', sans-serif;"
-    onclick="openPopup('Example_AnalyseSoilTemp.png')"
-  >
-    Soil Temperature
-  </button>
-  <button
-    style="background-color: #ff6d3a; color: white; padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-family: 'Figtree', sans-serif;"
-    onclick="openPopup('Example_AnalyseHumidity.png')"
-  >
-    Humidity
-  </button>
-  <button
-    style="background-color: #ff6d3a; color: white; padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-family: 'Figtree', sans-serif;"
-    onclick="openPopup('Example_AnalyseSoilMoisture.png')"
-  >
-    Soil Moisture
-  </button>
-  <button
-    style="background-color: #ff6d3a; color: white; padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-family: 'Figtree', sans-serif;"
-    onclick="openPopup('Example_AnalyseLightIntensity.png')"
-  >
-    Light Intensity
-  </button>
-</div>
+         
             Example
           </button>
 
@@ -871,27 +863,23 @@ What soil temperature does your plant need? </h3>
 
 
     <!-- Universal Popup -->
-    <div id="imagePopup" class="popup-overlay" onclick="closePopup()">
-      <div class="popup-content" onclick="event.stopPropagation()">
-        <span class="close-btn" onclick="closePopup()">×</span>
-        <img
-          id="popupImage"
-          alt="Example Popup"
-          style="
-            max-width: 100%;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 10px;
-          "
-        />
-      </div>
-    </div>
+<div id="popup" class="popup-overlay" onclick="closePopup()">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <img id="popup-img" src="" alt="Popup Image" />
+  </div>
+</div>
 
     <!-- Scripts -->
 
-    <script>
+        <script>
       let currentCard = 0;
-      const cards = document.querySelectorAll(".card");
+      let cards; // Declare cards globally
+
+      window.onload = function () {
+        cards = document.querySelectorAll(".card");
+        showCard(currentCard);
+      };
 
       function showCard(index) {
         // Pause and reset all videos
@@ -920,15 +908,23 @@ What soil temperature does your plant need? </h3>
         }
       }
 
-      function openPopup(imageUrl) {
-        const popup = document.getElementById("imagePopup");
-        const popupImage = document.getElementById("popupImage");
-        popupImage.src = imageUrl;
-        popup.style.display = "flex";
+      function goToCardById(cardId) {
+        const index = Array.from(cards).findIndex((card) => card.id === cardId);
+        if (index !== -1) {
+          currentCard = index;
+          showCard(currentCard);
+        } else {
+          console.warn("Card with ID '" + cardId + "' not found.");
+        }
+      }
+
+      function openPopup(imageSrc) {
+        document.getElementById("popup-img").src = imageSrc;
+        document.getElementById("popup").style.display = "flex";
       }
 
       function closePopup() {
-        document.getElementById("imagePopup").style.display = "none";
+        document.getElementById("popup").style.display = "none";
       }
     </script>
   </body>
