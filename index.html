@@ -4,83 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>One Health</title>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-body {
-  font-family: 'Figtree', sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 40px 20px;
-}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  max-width: 1200px;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  justify-items: center;
-}
+    .grid-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      max-width: 1200px;
+      width: 100%;
+    }
 
-.card {
-  font-family: 'Figtree', sans-serif;
-  background-color: #ff6d3a;
-  border-radius: 15px;
-  overflow: hidden;
-  text-align: center;
-  color: white;
-  padding: 15px 10px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 220px;
-}
+    .card {
+      background-color: #007bff;
+      border-radius: 15px;
+      overflow: hidden;
+      text-align: center;
+      color: white;
+      padding: 15px 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 220px; /* Set width based on white box + text */
+    }
 
-.image-box {
-  background: white;
-  border-radius: 10px;
-  width: 200px;
-  height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
-}
+    .image-box {
+      background: white;
+      border-radius: 10px;
+      width: 200px;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
 
-.image-box img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
+    .image-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
 
-.card h2 {
-  font-size: 1.1em;
-  margin: 0;
-  line-height: 1.3em;
-}
+    .card h2 {
+      font-size: 1.1em;
+      margin: 0;
+      line-height: 1.3em;
+    }
 
-.card a {
-  text-decoration: none;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+    .card a {
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-@media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-    align-items: center;
-  }
-}
+    @media (max-width: 768px) {
+      .grid-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 
 <body>
- <div class="grid-container">
+ <div class="grid-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; width: 100%; padding: 20px; box-sizing: border-box; justify-items: center;">
 
 
     <div class="card">
@@ -136,25 +136,6 @@ body {
         <h2>Waterbug Testing Kit</h2>
       </a>
     </div>
-
-        <div class="card">
-      <a href="bosonkit.html">
-        <div class="image-box">
-          <img src="BosonKit.jpg" alt="BOSON Kit" />
-        </div>
-        <h2>Boson Kit</h2>
-      </a>
-    </div>
-
-        <div class="card">
-      <a href="https://gtac.edu.au/prim7-one-health-heroes-feeding-a-growing-population/">
-        <div class="image-box">
-          <img src="GTAClogo.png" alt="Dissecting Microscope" />
-        </div>
-        <h2>Teacher Resources</h2>
-      </a>
-    </div>
-
 
   </div>
 </body>
