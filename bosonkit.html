@@ -482,7 +482,7 @@ When you connect the sensors to the micro:bit, you can design and run your own i
     <!-- Fourth Card -->
         <div class="card">
       <h1>04/11</h1>
-      <h2>The STEM Cycle of Inquiry: <strong>Ask Stage</strong></h2>
+      <h2>STEM Cycle of Inquiry: <strong>Ask Stage</strong></h2>
 
       <div class="card-instructions">
         <p>
@@ -583,19 +583,17 @@ What soil temperature does your plant need? </h3>
     <!-- Sixth Card -->
     <div class="card">
       <h1>06/11</h1>
-      <h2>The STEM Cycle of Inquiry: <strong>Predict Stage</strong></h2>
+      <h2>STEM Cycle of Inquiry: <strong>Predict Stage</strong></h2>
 
       <div class="card-instructions prediction-instructions">
-        <div style="margin: 10px 0px 10px 0px">
-          A prediction is what you think will happen in an experiment, before
-          you do it.
-        </div>
+          <h5>A prediction is what you think will happen in an experiment, before
+          you do it. </h5>
 
-        <p><strong>Use the following template to write your guess.</strong></p>
+        <h5>Use the following template to write your guess.</h5>
         <div class="prediction-template">
           <p>"If I ____, then I think ____ will happen because ____."</p>
         </div>
-        <p>
+        <p style="font-size: 0.8em">
           <strong>If I...</strong>What will you change or test?<br />
           <strong>Then I think...</strong>What do you think will happen?<br />
           <strong>Because...</strong>Why do you think that? Use your own ideas
@@ -612,7 +610,7 @@ What soil temperature does your plant need? </h3>
             class="stem-image"
           />
         </div>
-        <p style="color: #2e7d32">
+        <p style="color: #2e7d32; font-size: 0.8em">
           <strong>Example: <br />If I </strong>grow spinach seeds, <strong>then I think </strong>I won’t find
           it will grow best in soil temperatures between 10°C to 21°C<strong> because </strong>this is the optimal temperature range for spinach.
         </p>
@@ -638,7 +636,7 @@ What soil temperature does your plant need? </h3>
     <!-- Seventh Card -->
     <div class="card">
       <h1>07/11</h1>
-      <h2>The STEM Cycle of Inquiry: <strong>Plan Stage</strong></h2>
+      <h2>STEM Cycle of Inquiry: <strong>Plan Stage</strong></h2>
 
       <div class="card-instructions">
         <p style="margin: 30px 0 30px 0">
@@ -778,7 +776,7 @@ What soil temperature does your plant need? </h3>
     <!-- Tenth Card -->
     <div class="card">
       <h1>10/11</h1>
-      <h2>The STEM Cycle of Inquiry: <strong>Investigate Stage</strong>
+      <h2>STEM Cycle of Inquiry: <strong>Investigate Stage</strong>
       </h2>
 
       <h3>Time to conduct your investigation!</h3>
@@ -793,15 +791,53 @@ What soil temperature does your plant need? </h3>
           <li>Use a table to record your results</li>
           <li>Take photos or videos</li>
         </ul>
+                <p style="color: #ff6d3a; text-align: center"><strong>Click to look at examples of results:</strong>
       </div>
 
-      <img
-        style="max-height: 220px; max-width: 220px"
-        src="Investigate.png"
-        alt="Investigate Hexagon Graphic"
-        class="stem-image"
-      />
+        <div class="predict">
+        <div class="predict-icon">
+          <!--Putting the predict image class within the predict container-->
+          <img
+            src="Investigate.png"
+            alt="Investigate Hexagon Graphic"
+            class="stem-image"
+          />
+        </div>
 
+        <div class="image-preview-grid">
+   <button
+    style="background: #ff6d3a; border-radius: 12px; padding: 2px 8px; margin: 6px; border: none; cursor: pointer; font-size: 0.85em; height: 32px; line-height: 1;"
+    onclick="openPopup('Example_TempResults.png')"
+  >
+     <div><strong>Temperature (Air/Soil)</strong></div>
+  </button>
+
+  <button
+  style="background: #ff6d3a; border-radius: 12px; padding: 2px 8px; margin: 6px; border: none; cursor: pointer; font-size: 0.85em; height: 32px; line-height: 1;"
+    onclick="openPopup('Example_SoilMoistureResults.png')"
+  >
+    
+    <div><strong>Soil Moisture</strong></div>
+  </button>
+
+  <button
+  style="background: #ff6d3a; border-radius: 12px; padding: 2px 8px; margin: 6px; border: none; cursor: pointer; font-size: 0.85em; height: 32px; line-height: 1;"
+    onclick="openPopup('Example_HumidityResults.png')"
+  >
+        <div><strong>Humidity</strong></div>
+  </button>
+
+  <button
+  style="background: #ff6d3a; border-radius: 12px; padding: 2px 8px; margin: 6px; border: none; cursor: pointer; font-size: 0.85em; height: 32px; line-height: 1;"
+    onclick="openPopup('Example_LightIntensityResults.png')"
+  >
+     <div><strong>Light Intensity</strong></div>
+  </button>
+</div>
+
+      </div>
+
+      
       <div class="note">
         <div class="note-icon">
           <!--Putting the ask-note-icon class within the ask-note container-->
@@ -811,30 +847,12 @@ What soil temperature does your plant need? </h3>
           />
         </div>
         <h4 style="color: #ff6d3a;">
-         As you are completing your investigation, fill in the table on page 6 of your logbook. (Example below)
+         As you are completing your investigation, fill in the table on page 6 of your logbook.
         </h4>
       </div>
 
       <div class="nav-buttons">
         <button onclick="prevPage()">&#9664; Previous</button>
-
-        <button
-            style="
-              background-color: #ccc;
-              color: black;
-              padding: 10px 20px;
-              font-size: 1em;
-              border: none;
-              border-radius: 8px;
-              cursor: pointer;
-            "
-            onclick="openPopup('Example_Soil.png', '_blank')"
-          >
-         
-            Example
-          </button>
-
-
         <button onclick="nextPage()">Next &#9654;</button>
       </div>
     </div>
@@ -843,22 +861,57 @@ What soil temperature does your plant need? </h3>
     <div class="card">
       <h1 style="margin: 10px 0px 10px 0px">11/11</h1>
       <h2 style="margin: 10px 0px 20px 0px; font-size: 1.3em">
-        The STEM Cycle of Inquiry: <strong>Analyse  & Reflect Stage</strong>
+        STEM Cycle of Inquiry: <strong>Analyse  & Reflect Stage</strong>
       </h2>
       <h3 style="font-size: 1.2em">It’s time to do your investigation!</h3>
 
       <div class="card-instructions">
         <p style="margin: 10px 0px 10px 0px">
-          After your investigation, it is important to make sense of your results and find out what they mean. This stage will help you answer your original investigation question and see if your prediction was correct or not. 
+          After your investigation, it is important to make sense of your results and find out what they mean. This stage will help you answer your original investigation question and see if your prediction was correct or not. <br> </p>
+        <h4 style="text-align: center; color: #ff6d3a;">Click on the examples below to see examples of analysis & reflection: </h4>
 
- 
+      <div class="predict">
+        <div class="predict-icon">
+          <!--Putting the predict image class within the predict container-->
+          <img
+            src="Analyse.png"
+            alt="Analyse Hexagon Graphic"
+            class="stem-image"
+          />
+        </div>
 
-      <img
-        style="max-height: 220px; max-width: 220px"
-        src="Analyse.png"
-        alt="Analyse Hexagon Graphic"
-        class="stem-image"
-      />
+        <div class="image-preview-grid">
+   <button
+    style="background: #ff6d3a; border-radius: 12px; padding: 2px 8px; margin: 6px; border: none; cursor: pointer; font-size: 0.85em; height: 32px; line-height: 1;"
+    onclick="openPopup('Example_TempAnalysis.png')"
+  >
+     <div><strong>Temperature </strong></div>
+  </button>
+
+  <button
+  style="background: #ff6d3a; border-radius: 12px; padding: 2px 8px; margin: 6px; border: none; cursor: pointer; font-size: 0.85em; height: 32px; line-height: 1;"
+    onclick="openPopup('Example_SoilMoistureAnalysis.png')"
+  >
+    
+    <div><strong>Soil Moisture</strong></div>
+  </button>
+
+  <button
+  style="background: #ff6d3a; border-radius: 12px; padding: 2px 8px; margin: 6px; border: none; cursor: pointer; font-size: 0.85em; height: 32px; line-height: 1;"
+    onclick="openPopup('Example_HumidityAnalysis.png')"
+  >
+        <div><strong>Humidity</strong></div>
+  </button>
+
+  <button
+  style="background: #ff6d3a; border-radius: 12px; padding: 2px 8px; margin: 6px; border: none; cursor: pointer; font-size: 0.85em; height: 32px; line-height: 1;"
+    onclick="openPopup('Example_LightIntensityAnalysis.png')"
+  >
+     <div><strong>Light Intensity</strong></div>
+  </button>
+</div>
+
+      </div>
 
       <div class="note">
         <div class="note-icon">
@@ -874,22 +927,6 @@ What soil temperature does your plant need? </h3>
 
       <div class="nav-buttons">
         <button onclick="prevPage()">&#9664; Previous</button>
-
-                <button
-            style="
-              background-color: #ccc;
-              color: black;
-              padding: 10px 20px;
-              font-size: 1em;
-              border: none;
-              border-radius: 8px;
-              cursor: pointer;
-            "
-            onclick="openPopup('Example_AnalyseSoilTemp.png', '_blank')"
-          >
-            Example
-          </button>
-
         <button onclick="location.href='index.html'">Home &#9654;</button>
       </div>
     </div>
